@@ -8,6 +8,7 @@ class Node{
 
 class LinkedList{
     Node first;
+    Node last;
     public void insertAtFirst(int data){
         Node n = new Node(data);
         if(first==null){
@@ -53,6 +54,22 @@ class LinkedList{
         }
     }
 
+    public void insertInOrder(int data){
+        Node n = new Node(data);
+        Node save = first;
+        Node temp = save;
+        if(first==null){
+            first = n;
+        }else{
+            while((save.link!=null)&&(n.data>=save.data)){
+                temp = save;
+                save = save.link;
+            }
+            n.link = save;
+            temp.link = n;
+        }
+    }
+
     public void countNodes(){
         int count = 0;
         if(first==null){
@@ -66,7 +83,7 @@ class LinkedList{
         }
         System.out.println("Total no. of nodes in linked list are : " + count);
     }
-    //insert at first , insert at last , delete node , copy linked list , count nodes 
+    
     public LinkedList copyLinkedList(Node first,LinkedList l){
         LinkedList l1 = new LinkedList();
         Node save = first;
@@ -100,10 +117,7 @@ public class LinkedListOperations {
         l1.insertAtLast(25);
         l1.insertAtLast(30);
         l1.insertAtLast(35);
-        LinkedList l2 = l1.copyLinkedList(l1.first, l1);
-        l2.deleteNode(25);
-        l2.display();
-        l2.countNodes();
+        l1.insertInOrder(22);
         l1.display();
         l1.countNodes();
     }
